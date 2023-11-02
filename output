@@ -1,8 +1,32 @@
-ubuntu@a100-1:~$ time nvidia-smi -q
+ubuntu@a100-1:~$ ./tf_devices.py & sleep 10s && time nvidia-smi -q
+[1] 316673
+2023-11-02 20:42:13.628997: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-11-02 20:42:13.737255: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-11-02 20:42:14.333012: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
+2023-11-02 20:42:14.333083: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
+2023-11-02 20:42:14.333091: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+tf version: 2.11.0
+OrderedDict([('cpu_compiler', '/dt9/usr/bin/gcc'),
+             ('cuda_compute_capabilities',
+              ['sm_35', 'sm_50', 'sm_60', 'sm_70', 'sm_75', 'compute_80']),
+             ('cuda_version', '11.2'),
+             ('cudnn_version', '8'),
+             ('is_cuda_build', True),
+             ('is_rocm_build', False),
+             ('is_tensorrt_build', True)])
+2023-11-02 20:43:51.154091: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:267] failed call to cuInit: CUDA_ERROR_NOT_INITIALIZED: initialization error
+2023-11-02 20:43:51.154191: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: a100-1
+2023-11-02 20:43:51.154206: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: a100-1
+2023-11-02 20:43:51.154484: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 525.125.6
+2023-11-02 20:43:51.154548: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 525.125.6
+2023-11-02 20:43:51.154562: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 525.125.6
+[PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
+Took 96s
 
 ==============NVSMI LOG==============
 
-Timestamp                                 : Thu Nov  2 20:36:18 2023
+Timestamp                                 : Thu Nov  2 20:43:51 2023
 Driver Version                            : 525.125.06
 CUDA Version                              : 12.0
 
@@ -70,7 +94,7 @@ GPU 00000000:00:07.0
             Firmware                      : N/A
         Replays Since Reset               : 0
         Replay Number Rollovers           : 0
-        Tx Throughput                     : 0 KB/s
+        Tx Throughput                     : 9000 KB/s
         Rx Throughput                     : 0 KB/s
         Atomic Caps Inbound               : N/A
         Atomic Caps Outbound              : N/A
@@ -149,17 +173,17 @@ GPU 00000000:00:07.0
         Memory Max Operating Temp         : 95 C
     Power Readings
         Power Management                  : Supported
-        Power Draw                        : 67.20 W
+        Power Draw                        : 88.46 W
         Power Limit                       : 300.00 W
         Default Power Limit               : 300.00 W
         Enforced Power Limit              : 300.00 W
         Min Power Limit                   : 150.00 W
         Max Power Limit                   : 300.00 W
     Clocks
-        Graphics                          : 210 MHz
-        SM                                : 210 MHz
+        Graphics                          : 1410 MHz
+        SM                                : 1410 MHz
         Memory                            : 1512 MHz
-        Video                             : 795 MHz
+        Video                             : 1275 MHz
     Applications Clocks
         Graphics                          : 1410 MHz
         Memory                            : 1512 MHz
@@ -179,13 +203,13 @@ GPU 00000000:00:07.0
         Auto Boost                        : N/A
         Auto Boost Default                : N/A
     Voltage
-        Graphics                          : 712.500 mV
+        Graphics                          : 893.750 mV
     Fabric
         State                             : N/A
         Status                            : N/A
     Processes                             : None
 
 
-real    0m0.120s
-user    0m0.005s
-sys     0m0.069s
+real    1m27.702s
+user    0m0.004s
+sys     0m1.038s
