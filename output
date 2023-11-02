@@ -1,11 +1,11 @@
-ubuntu@nyou045-a100-test:~$ ./tf_devices.py & sleep 10s && nvidia-smi -q
-[1] 96902
-2023-11-02 20:55:18.890640: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+ubuntu@nyou045-a100-test:~$ ./tf_devices.py & sleep 10s && time nvidia-smi -q
+[1] 97030
+2023-11-02 23:04:42.885972: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2023-11-02 20:55:19.029929: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2023-11-02 20:55:19.734590: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
-2023-11-02 20:55:19.734671: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
-2023-11-02 20:55:19.734680: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+2023-11-02 23:04:43.181262: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-11-02 23:04:44.075596: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
+2023-11-02 23:04:44.075700: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
+2023-11-02 23:04:44.075721: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
 tf version: 2.11.0
 OrderedDict([('cpu_compiler', '/dt9/usr/bin/gcc'),
              ('cuda_compute_capabilities',
@@ -15,18 +15,18 @@ OrderedDict([('cpu_compiler', '/dt9/usr/bin/gcc'),
              ('is_cuda_build', True),
              ('is_rocm_build', False),
              ('is_tensorrt_build', True)])
-2023-11-02 20:56:50.406997: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:267] failed call to cuInit: CUDA_ERROR_NOT_INITIALIZED: initialization error
-2023-11-02 20:56:50.407147: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: nyou045-a100-test
-2023-11-02 20:56:50.407168: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: nyou045-a100-test
-2023-11-02 20:56:50.407336: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 525.125.6
-2023-11-02 20:56:50.407439: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 525.125.6
-2023-11-02 20:56:50.407468: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 525.125.6
+2023-11-02 23:06:14.891459: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:267] failed call to cuInit: CUDA_ERROR_NOT_INITIALIZED: initialization error
+2023-11-02 23:06:14.891666: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: nyou045-a100-test
+2023-11-02 23:06:14.891702: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: nyou045-a100-test
+2023-11-02 23:06:14.891962: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 525.125.6
+2023-11-02 23:06:14.892108: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 525.125.6
+2023-11-02 23:06:14.892137: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 525.125.6
 [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
 Took 90s
 
 ==============NVSMI LOG==============
 
-Timestamp                                 : Thu Nov  2 20:56:56 2023
+Timestamp                                 : Thu Nov  2 23:06:20 2023
 Driver Version                            : 525.125.06
 CUDA Version                              : 12.0
 
@@ -94,8 +94,8 @@ GPU 00000000:00:08.0
             Firmware                      : N/A
         Replays Since Reset               : 0
         Replay Number Rollovers           : 0
-        Tx Throughput                     : 1947909000 KB/s
-        Rx Throughput                     : 1253081408 KB/s
+        Tx Throughput                     : 1993378000 KB/s
+        Rx Throughput                     : 1241858408 KB/s
         Atomic Caps Inbound               : N/A
         Atomic Caps Outbound              : N/A
     Fan Speed                             : 0 %
@@ -191,3 +191,7 @@ GPU 00000000:00:08.0
     Processes                             : None
 
 [1]+  Done                    ./tf_devices.py
+
+real    1m28.097s
+user    0m2.367s
+sys     1m14.377s
