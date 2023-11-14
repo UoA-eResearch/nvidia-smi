@@ -21,25 +21,27 @@ command = './tf_devices.py & sleep 10s && time nvidia-smi -q'
 
 # Function to SSH into a machine, run the command, and measure time
 def execute_ssh(ip):
-    # SSH into the machine using the provided SSH key
-    private_key_path = '/home/ubuntu/.ssh/id_rsa'
-    private_key = paramiko.RSAKey(filename=private_key_path)
-
-    # SSH into the machine
-    ssh = paramiko.SSHClient()
-    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(ip, username='ubuntu', pkey=private_key)
-
-    # Run the command and measure time
     start_time = time.time()
-    stdin, stdout, stderr = ssh.exec_command(command)
-    stdout.channel.set_combine_stderr(True)
-    output = stdout.read().decode('utf-8')
+    try:
+      # SSH into the machine using the provided SSH key
+      private_key_path = '/home/ubuntu/.ssh/id_rsa'
+      private_key = paramiko.RSAKey(filename=private_key_path)
+
+      # SSH into the machine
+      ssh = paramiko.SSHClient()
+      ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+      ssh.connect(ip, username='ubuntu', pkey=private_key)
+
+      # Run the command and measure time
+      stdin, stdout, stderr = ssh.exec_command(command, timeout=300)
+      stdout.channel.set_combine_stderr(True)
+      output = stdout.read().decode('utf-8')
+
+      # Close the SSH connection
+      ssh.close()
+    except Exception as e:
+       output = str(e)
     elapsed_time = time.time() - start_time
-
-    # Close the SSH connection
-    ssh.close()
-
     return ip, elapsed_time, output
 
 
@@ -53,7 +55,7 @@ df['timestamp'] = pd.Timestamp.now()
 # Save results to a CSV file using pandas
 csv_filename = 'ssh_results.csv'
 if os.path.isfile(csv_filename):
-  df = pd.concat(pd.read_csv(csv_filename), df)
+  df = pd.concat([pd.read_csv(csv_filename), df])
 df.to_csv(csv_filename, index=False)
 
 print(f"Results saved to {csv_filename}")
