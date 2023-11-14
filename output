@@ -1,20 +1,44 @@
-[root@supportlive ~]# nvidia-smi -q
+ubuntu@nyou045-a100-test:~$ ./tf_devices.py & sleep 10s && time nvidia-smi -q
+[1] 2643
+2023-11-14 03:18:15.614453: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-11-14 03:18:15.743737: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-11-14 03:18:16.360517: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
+2023-11-14 03:18:16.360615: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /usr/local/cuda-12.0/lib64
+2023-11-14 03:18:16.360623: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+tf version: 2.11.0
+OrderedDict([('cpu_compiler', '/dt9/usr/bin/gcc'),
+             ('cuda_compute_capabilities',
+              ['sm_35', 'sm_50', 'sm_60', 'sm_70', 'sm_75', 'compute_80']),
+             ('cuda_version', '11.2'),
+             ('cudnn_version', '8'),
+             ('is_cuda_build', True),
+             ('is_rocm_build', False),
+             ('is_tensorrt_build', True)])
+2023-11-14 03:19:28.906829: E tensorflow/compiler/xla/stream_executor/cuda/cuda_driver.cc:267] failed call to cuInit: CUDA_ERROR_NOT_INITIALIZED: initialization error
+2023-11-14 03:19:28.906894: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: nyou045-a100-test
+2023-11-14 03:19:28.906907: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: nyou045-a100-test
+2023-11-14 03:19:28.907047: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 525.125.6
+2023-11-14 03:19:28.907081: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 525.125.6
+2023-11-14 03:19:28.907090: I tensorflow/compiler/xla/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 525.125.6
+[PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')]
+Took 72s
+
 
 ==============NVSMI LOG==============
 
-Timestamp                                 : Thu Nov  2 22:11:27 2023
-Driver Version                            : 535.113.01
-CUDA Version                              : 12.2
+Timestamp                                 : Tue Nov 14 03:19:52 2023
+Driver Version                            : 525.125.06
+CUDA Version                              : 12.0
 
 Attached GPUs                             : 1
-GPU 00000000:00:06.0
+GPU 00000000:00:08.0
     Product Name                          : NVIDIA A100 80GB PCIe
     Product Brand                         : NVIDIA
     Product Architecture                  : Ampere
     Display Mode                          : Enabled
     Display Active                        : Disabled
-    Persistence Mode                      : Disabled
-    Addressing Mode                       : None
+    Persistence Mode                      : Enabled
     MIG Mode
         Current                           : Disabled
         Pending                           : Disabled
@@ -23,15 +47,14 @@ GPU 00000000:00:06.0
     Driver Model
         Current                           : N/A
         Pending                           : N/A
-    Serial Number                         : 1323022015019
-    GPU UUID                              : GPU-63e0108e-5b11-af7e-53a3-a29af5ad3406
+    Serial Number                         : 1322822261453
+    GPU UUID                              : GPU-a6681a48-340f-7976-d71f-7f1c0cd5cfb9
     Minor Number                          : 0
     VBIOS Version                         : 92.00.90.00.0F
     MultiGPU Board                        : No
-    Board ID                              : 0x6
+    Board ID                              : 0x8
     Board Part Number                     : 900-21001-0120-130
     GPU Part Number                       : 20B5-893-A1
-    FRU Part Number                       : N/A
     Module ID                             : 1
     Inforom Version
         Image Version                     : 1001.0230.00.03
@@ -41,21 +64,21 @@ GPU 00000000:00:06.0
     GPU Operation Mode
         Current                           : N/A
         Pending                           : N/A
-    GSP Firmware Version                  : 535.113.01
+    GSP Firmware Version                  : 525.125.06
     GPU Virtualization Mode
         Virtualization Mode               : Pass-Through
         Host VGPU Mode                    : N/A
-    GPU Reset Status
-        Reset Required                    : No
-        Drain and Reset Recommended       : No
+    vGPU Software Licensed Product
+        Product Name                      : NVIDIA Virtual Applications
+        License Status                    : Licensed (Expiry: N/A)
     IBMNPU
         Relaxed Ordering Mode             : N/A
     PCI
         Bus                               : 0x00
-        Device                            : 0x06
+        Device                            : 0x08
         Domain                            : 0x0000
         Device Id                         : 0x20B510DE
-        Bus Id                            : 00000000:00:06.0
+        Bus Id                            : 00000000:00:08.0
         Sub System Id                     : 0x153310DE
         GPU Link Info
             PCIe Generation
@@ -78,8 +101,8 @@ GPU 00000000:00:06.0
         Atomic Caps Outbound              : N/A
     Fan Speed                             : N/A
     Performance State                     : P0
-    Clocks Event Reasons
-        Idle                              : Not Active
+    Clocks Throttle Reasons
+        Idle                              : Active
         Applications Clocks Setting       : Not Active
         SW Power Cap                      : Not Active
         HW Slowdown                       : Not Active
@@ -90,25 +113,19 @@ GPU 00000000:00:06.0
         Display Clock Setting             : Not Active
     FB Memory Usage
         Total                             : 81920 MiB
-        Reserved                          : 869 MiB
-        Used                              : 4 MiB
-        Free                              : 81046 MiB
+        Reserved                          : 867 MiB
+        Used                              : 0 MiB
+        Free                              : 81052 MiB
     BAR1 Memory Usage
         Total                             : 131072 MiB
         Used                              : 1 MiB
         Free                              : 131071 MiB
-    Conf Compute Protected Memory Usage
-        Total                             : 0 MiB
-        Used                              : 0 MiB
-        Free                              : 0 MiB
     Compute Mode                          : Default
     Utilization
-        Gpu                               : 20 %
+        Gpu                               : 0 %
         Memory                            : 0 %
         Encoder                           : 0 %
         Decoder                           : 0 %
-        JPEG                              : 0 %
-        OFA                               : 0 %
     Encoder Stats
         Active Sessions                   : 0
         Average FPS                       : 0
@@ -117,7 +134,7 @@ GPU 00000000:00:06.0
         Active Sessions                   : 0
         Average FPS                       : 0
         Average Latency                   : 0
-    ECC Mode
+    Ecc Mode
         Current                           : Enabled
         Pending                           : Enabled
     ECC Errors
@@ -147,28 +164,22 @@ GPU 00000000:00:06.0
             Low                           : 0 bank(s)
             None                          : 0 bank(s)
     Temperature
-        GPU Current Temp                  : 32 C
+        GPU Current Temp                  : 31 C
         GPU T.Limit Temp                  : N/A
         GPU Shutdown Temp                 : 92 C
         GPU Slowdown Temp                 : 89 C
         GPU Max Operating Temp            : 85 C
         GPU Target Temperature            : N/A
-        Memory Current Temp               : 48 C
+        Memory Current Temp               : 45 C
         Memory Max Operating Temp         : 95 C
-    GPU Power Readings
-        Power Draw                        : 67.58 W
-        Current Power Limit               : 300.00 W
-        Requested Power Limit             : 300.00 W
+    Power Readings
+        Power Management                  : Supported
+        Power Draw                        : 84.24 W
+        Power Limit                       : 300.00 W
         Default Power Limit               : 300.00 W
+        Enforced Power Limit              : 300.00 W
         Min Power Limit                   : 150.00 W
         Max Power Limit                   : 300.00 W
-    Module Power Readings
-        Power Draw                        : N/A
-        Current Power Limit               : N/A
-        Requested Power Limit             : N/A
-        Default Power Limit               : N/A
-        Min Power Limit                   : N/A
-        Max Power Limit                   : N/A
     Clocks
         Graphics                          : 1410 MHz
         SM                                : 1410 MHz
@@ -193,8 +204,14 @@ GPU 00000000:00:06.0
         Auto Boost                        : N/A
         Auto Boost Default                : N/A
     Voltage
-        Graphics                          : 887.500 mV
+        Graphics                          : 912.500 mV
     Fabric
         State                             : N/A
         Status                            : N/A
     Processes                             : None
+
+[1]+  Done                    ./tf_devices.py
+
+real    1m27.382s
+user    0m1.716s
+sys     1m20.866s
