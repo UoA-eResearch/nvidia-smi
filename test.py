@@ -55,7 +55,7 @@ df['timestamp'] = pd.Timestamp.now()
 # Save results to a CSV file using pandas
 csv_filename = 'ssh_results.csv'
 if os.path.isfile(csv_filename):
-  df = pd.concat([pd.read_csv(csv_filename), df])
+  df = pd.concat([pd.read_csv(csv_filename, on_bad_lines="warn"), df])
 df.to_csv(csv_filename, index=False)
 
 print(f"Results saved to {csv_filename}")
