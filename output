@@ -1,5 +1,7 @@
 [root@supportlive ~]# ./torch_devices.py & sleep 10s && time nvidia-smi -q
-[1] 66505
+[1] 59079
+/usr/local/lib64/python3.6/site-packages/torch/package/_directory_reader.py:17: UserWarning: Failed to initialize NumPy: numpy.core.multiarray failed to import (Triggered internally at  ../torch/csrc/utils/tensor_numpy.cpp:68.)
+  _dtype_to_storage = {data_type(0).dtype: data_type for data_type in _storages}
 PyTorch version: 1.10.2+cu102
 PyTorch build information:
 /usr/local/lib64/python3.6/site-packages/torch/__config__.py:9: UserWarning: CUDA initialization: CUDA driver initialization failed, you might not have a CUDA gpu. (Triggered internally at  ../c10/cuda/CUDAFunctions.cpp:112.)
@@ -36,11 +38,11 @@ PyTorch build information:
  'USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, \n')
 PyTorch CUDA availability: False
 PyTorch CUDA devices:
-Took 78s
+Took 85s
 
 ==============NVSMI LOG==============
 
-Timestamp                                 : Sun Nov 19 17:52:06 2023
+Timestamp                                 : Mon Nov 20 22:25:05 2023
 Driver Version                            : 535.129.03
 CUDA Version                              : 12.2
 
@@ -61,7 +63,7 @@ GPU 00000000:00:06.0
     Driver Model
         Current                           : N/A
         Pending                           : N/A
-    Serial Number                         : 1322822261453
+    Serial Number                         : 1323022015019
     GPU UUID                              : Unknown Error
     Minor Number                          : 0
     VBIOS Version                         : Unknown Error
@@ -111,9 +113,9 @@ GPU 00000000:00:06.0
         Bridge Chip
             Type                          : N/A
             Firmware                      : N/A
-        Replays Since Reset               : 13921
+        Replays Since Reset               : 13110
         Replay Number Rollovers           : 37376
-        Tx Throughput                     : -2022441960 KB/s
+        Tx Throughput                     : -1635107216 KB/s
         Rx Throughput                     : Unknown Error
         Atomic Caps Inbound               : N/A
         Atomic Caps Outbound              : N/A
@@ -233,6 +235,6 @@ GPU 00000000:00:06.0
 
 [1]+  Done                    ./torch_devices.py
 
-real    3m2.968s
-user    0m0.982s
-sys     3m14.464s
+real    3m10.161s
+user    0m0.564s
+sys     3m12.758s
