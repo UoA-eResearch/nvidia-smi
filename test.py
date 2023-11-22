@@ -13,7 +13,7 @@ machine_ips = [
   "130.216.217.65",
   "130.216.217.127",
   "130.216.216.117",
-  "130.216.217.118"
+  "130.216.216.201"
 ]
 
 # Define the command to be executed on each machine
