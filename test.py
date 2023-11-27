@@ -35,7 +35,7 @@ def execute_ssh(ip):
       # Run the command and measure time
       stdin, stdout, stderr = ssh.exec_command(command, timeout=300)
       stdout.channel.set_combine_stderr(True)
-      output = stdout.read().decode('utf-8')
+      output = stdout.read().decode('utf-8', errors="replace")
 
       # Close the SSH connection
       ssh.close()
